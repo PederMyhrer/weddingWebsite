@@ -17,122 +17,109 @@
     --ink-soft: #5a4e45;
     --ink-muted: #8a7e76;
     --border: rgba(176, 144, 96, 0.25);
+    --border-strong: rgba(176, 144, 96, 0.45);
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--cream);
+    background: #e8e2d8;
     color: var(--ink);
     font-family: 'Jost', sans-serif;
     font-weight: 300;
     letter-spacing: 0.03em;
   }
 
-  /* ── NAV ── */
-  nav {
+  /* ── FIXED INVITATION BORDER FRAME ── */
+  .page-frame {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(248, 244, 238, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 0.5px solid var(--border);
+    inset: 10px;
+    border: 0.5px solid var(--border-strong);
+    pointer-events: none;
+    z-index: 200;
   }
 
-  .nav-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
+  /* ── CARD WRAPPER ── */
+  .card {
+    background: var(--cream);
+    max-width: 640px;
+    margin: 0 auto;
+    min-height: 100vh;
   }
 
-  .nav-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--ink-soft);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    line-height: 1;
-  }
-
-  /* Hamburger */
-  .nav-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    min-width: 44px;
-    min-height: 44px;
-    align-items: center;
-  }
-  .nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 1px;
-    background: var(--ink-soft);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-  /* Mobile dropdown */
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    padding: 0.5rem 0 1.25rem;
-    border-top: 0.5px solid var(--border);
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a {
-    padding: 0.85rem 1.5rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--ink-soft);
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* Desktop nav */
   @media (min-width: 700px) {
-    .nav-brand  { display: none; }
-    .nav-toggle { display: none; }
-    .nav-inner  { justify-content: center; padding: 1.25rem 2rem; }
-    .nav-links  {
-      display: flex !important;
-      flex-direction: row;
-      gap: 2.5rem;
-      padding: 0;
-      border: none;
-      justify-content: center;
+    .card {
+      box-shadow: 0 8px 60px rgba(44, 37, 32, 0.12);
+      margin: 2rem auto;
+      min-height: auto;
     }
-    .nav-links a { padding: 0; font-size: 0.72rem; }
+    body { padding: 0 1rem; }
+  }
+
+  /* ── SECTIONS ── */
+  .card section {
+    padding: 3rem 2rem;
+    max-width: 100%;
+  }
+
+  /* ── SECTION SEPARATOR ── */
+  .sep {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    color: var(--gold-light);
+  }
+  .sep::before, .sep::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+  .sep span {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+  }
+
+  .section-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+    text-align: center;
+    margin-bottom: 1.4rem;
+    color: var(--ink);
+  }
+
+  .divider {
+    width: 50px;
+    height: 0.5px;
+    background: var(--gold-light);
+    margin: 0 auto 1.8rem;
   }
 
   /* ── HERO ── */
   #hero {
-    min-height: 100svh;
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 5rem 1.5rem 3rem;
-    position: relative;
-    overflow: hidden;
   }
 
   .hero-img-wrap {
-    width: min(520px, 92vw);
+    width: 100%;
     aspect-ratio: 4/3;
-    border-radius: 2px;
+    border-radius: 1px;
     margin: 0 auto 2.5rem;
     overflow: hidden;
     background: #d4c8b8;
@@ -146,8 +133,8 @@
   }
 
   .eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
+    font-size: 0.65rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 1rem;
@@ -156,15 +143,15 @@
   h1 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: clamp(2.8rem, 11vw, 5rem);
-    line-height: 1.1;
+    font-size: clamp(3rem, 11vw, 5rem);
+    line-height: 1.05;
     color: var(--ink);
   }
 
   .amp {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 0.6em;
+    font-size: 0.55em;
     color: var(--gold);
     display: block;
     margin: 0.1rem 0;
@@ -174,89 +161,26 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin: 1.5rem auto;
+    margin: 1.8rem auto 0.5rem;
     width: fit-content;
-    color: var(--gold-light);
     font-size: 0.72rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
   }
   .ornament::before, .ornament::after {
     content: '';
     display: block;
-    width: 50px;
+    width: 40px;
     height: 0.5px;
     background: var(--gold-light);
   }
 
   .date-line {
-    font-size: 0.78rem;
-    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink-muted);
-  }
-
-  .scroll-hint {
-    display: none;
-  }
-  @media (min-width: 700px) {
-    .scroll-hint {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-top: 2.5rem;
-      animation: fadeInUp 2s ease 1s both;
-    }
-    .scroll-arrow {
-      width: 1px;
-      height: 32px;
-      background: linear-gradient(to bottom, transparent, var(--gold-light));
-      animation: pulse 2s ease-in-out infinite;
-    }
-  }
-  @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── SECTIONS ── */
-  section {
-    padding: 3rem 1.5rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  @media (min-width: 700px) {
-    section { padding: 3rem 2rem; }
-  }
-
-  .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.8rem;
-    text-align: center;
-  }
-
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(1.7rem, 6vw, 2.6rem);
-    text-align: center;
-    margin-bottom: 1.4rem;
-    color: var(--ink);
-  }
-
-  .divider {
-    width: 60px;
-    height: 0.5px;
-    background: var(--gold-light);
-    margin: 0 auto 1.8rem;
+    margin-top: 0.4rem;
   }
 
   /* ── DATO OG STED ── */
@@ -265,13 +189,14 @@
     flex-direction: column;
     gap: 1.5rem;
   }
-  @media (min-width: 700px) {
+  @media (min-width: 600px) {
     .locations {
       display: grid;
       grid-template-columns: 1fr 0.5px 1fr;
       gap: 0;
     }
-    .locations .loc-sep {
+    .loc-sep {
+      display: block !important;
       background: var(--border);
       align-self: stretch;
       margin: 1rem 0;
@@ -279,33 +204,27 @@
   }
   .loc-sep { display: none; }
 
-  .location-card {
-    text-align: center;
-  }
-  @media (min-width: 700px) {
-    .location-card { padding: 1rem 2.5rem; }
+  .location-card { text-align: center; }
+  @media (min-width: 600px) {
+    .location-card { padding: 0.5rem 2rem; }
   }
 
   .location-img {
     width: 100%;
     aspect-ratio: 16/7;
     background: #d4c8b8;
-    border-radius: 2px;
+    border-radius: 1px;
     overflow: hidden;
     margin-bottom: 1rem;
   }
-  .location-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .location-img img { width: 100%; height: 100%; object-fit: cover; }
 
   .loc-time {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
   .location-card h3 {
     font-family: 'Cormorant Garamond', serif;
@@ -314,75 +233,57 @@
     margin-bottom: 0.3rem;
     color: var(--ink);
   }
-  .location-card p {
-    font-size: 0.82rem;
-    color: var(--ink-muted);
-    line-height: 1.6;
-  }
+  .location-card p { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.6; }
 
   /* ── PROGRAM ── */
   .timeline {
     list-style: none;
     position: relative;
-    padding-left: 0;
     margin: 0 auto;
-    max-width: 340px;
+    max-width: 320px;
   }
   .timeline::before {
     content: '';
     position: absolute;
-    left: 80px;
-    top: 8px; bottom: 8px;
+    left: 75px; top: 8px; bottom: 8px;
     width: 0.5px;
     background: var(--border);
   }
   .timeline li {
     display: grid;
-    grid-template-columns: 80px 1fr;
-    padding: 0.9rem 0;
+    grid-template-columns: 75px 1fr;
+    padding: 0.85rem 0;
     align-items: center;
   }
   .tl-time {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gold);
     text-align: right;
-    padding-right: 1.3rem;
-    line-height: 1;
+    padding-right: 1.2rem;
   }
-  .tl-event {
-    padding-left: 1.3rem;
-    position: relative;
-  }
+  .tl-event { padding-left: 1.2rem; position: relative; }
   .tl-event::before {
     content: '';
     position: absolute;
-    left: -3px;
-    top: 50%; transform: translateY(-50%);
+    left: -3px; top: 50%; transform: translateY(-50%);
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--gold-light);
     border: 1.5px solid var(--gold);
   }
   .timeline li.hl .tl-event::before {
-    width: 9px; height: 9px;
-    left: -4.5px;
+    width: 9px; height: 9px; left: -4.5px;
     background: var(--gold);
   }
   .tl-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.2;
+    font-size: 1.05rem; font-weight: 400;
+    color: var(--ink); line-height: 1.2;
   }
   .timeline li.hl .tl-title { font-style: italic; font-size: 1.15rem; }
-  .tl-sub {
-    font-size: 0.73rem;
-    color: var(--ink-muted);
-    margin-top: 0.15rem;
-  }
+  .tl-sub { font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.1rem; }
 
   /* ── PRAKTISK ── */
   .info-grid {
@@ -390,37 +291,28 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
     .info-grid { grid-template-columns: 1fr 1fr; }
     .info-card.full { grid-column: 1 / -1; }
   }
   .info-card {
     border: 0.5px solid var(--border);
     padding: 1.25rem;
-    border-radius: 2px;
+    border-radius: 1px;
   }
-  .info-card .icon {
-    font-size: 1rem;
-    color: var(--gold);
-    margin-bottom: 0.7rem;
-  }
+  .info-card .icon { font-size: 0.9rem; color: var(--gold); margin-bottom: 0.6rem; }
   .info-card h4 {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-    color: var(--ink);
+    font-weight: 400; font-size: 1.1rem;
+    margin-bottom: 0.4rem; color: var(--ink);
   }
   .info-card p, .info-card a {
-    font-size: 0.82rem;
-    color: var(--ink-muted);
-    line-height: 1.7;
-    text-decoration: none;
+    font-size: 0.82rem; color: var(--ink-muted);
+    line-height: 1.7; text-decoration: none;
   }
   .info-card a:hover { color: var(--gold); }
 
   /* ── MENY ── */
-  /* Drikke-rad */
   .drink-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -433,36 +325,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
-  .drink-item img {
-    max-height: 100px;
-    width: auto;
-    mix-blend-mode: multiply;
-  }
-  @media (min-width: 500px) {
-    .drink-item img { max-height: 130px; }
-  }
-  .drink-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .drink-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-  .drink-sub {
-    font-size: 0.73rem;
-    color: var(--ink-muted);
-    line-height: 1.5;
-  }
+  .drink-item img { max-height: 110px; width: auto; mix-blend-mode: multiply; }
+  .drink-label { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+  .drink-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--ink); line-height: 1.2; }
+  .drink-sub { font-size: 0.72rem; color: var(--ink-muted); line-height: 1.5; }
 
-  /* Matrett-rad */
   .course-row {
     display: flex;
     flex-direction: column;
@@ -473,52 +342,22 @@
     border-bottom: 0.5px solid var(--border);
   }
   .course-row:last-child { border-bottom: none; }
-  .course-row img {
-    width: min(200px, 70%);
-    height: auto;
-    mix-blend-mode: multiply;
-  }
-  .course-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
-  }
-  .course-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.3rem;
-    line-height: 1.2;
-  }
-  .course-desc {
-    font-size: 0.78rem;
-    color: var(--ink-muted);
-    line-height: 1.7;
-  }
+  .course-row img { width: min(180px, 65%); height: auto; mix-blend-mode: multiply; }
+  .course-label { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .course-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; }
+  .course-desc { font-size: 0.78rem; color: var(--ink-muted); line-height: 1.7; }
 
-  /* Desktop meny: alternating layout */
-  @media (min-width: 600px) {
-    .course-row {
-      flex-direction: row;
-      text-align: left;
-      gap: 2rem;
-    }
+  @media (min-width: 500px) {
+    .course-row { flex-direction: row; text-align: left; gap: 2rem; }
     .course-row.reverse { flex-direction: row-reverse; text-align: right; }
-    .course-row img { width: 200px; flex-shrink: 0; }
+    .course-row img { width: 180px; flex-shrink: 0; }
   }
 
   /* ── ØNSKELISTE ── */
-  #onskeliste {
-    text-align: center;
-  }
+  #onskeliste { text-align: center; }
   .wish-intro {
-    font-size: 0.88rem;
-    color: var(--ink-muted);
-    line-height: 1.9;
-    max-width: 460px;
+    font-size: 0.88rem; color: var(--ink-muted);
+    line-height: 1.9; max-width: 440px;
     margin: 0 auto 2rem;
   }
   .wish-btn {
@@ -526,12 +365,9 @@
     padding: 1rem 2.5rem;
     border: 0.5px solid var(--ink);
     font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
+    font-size: 0.72rem; font-weight: 300;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
     transition: background 0.2s, color 0.2s;
     min-height: 44px;
   }
@@ -540,127 +376,77 @@
   /* ── DRESSCODE ── */
   #dresscode {
     text-align: center;
+    padding: 3rem 2rem;
     border-top: 0.5px solid var(--border);
     border-bottom: 0.5px solid var(--border);
-    padding: 3rem 1.5rem;
-  }
-  @media (min-width: 700px) {
-    #dresscode { padding: 3rem 2rem; }
   }
   .dc-label {
     display: inline-block;
     border: 0.5px solid var(--gold-light);
     padding: 0.5rem 1.5rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
     margin-bottom: 1.5rem;
   }
   #dresscode h2 { margin-bottom: 1rem; }
   #dresscode p {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--ink-soft);
-    max-width: 460px;
-    margin: 0 auto;
-    line-height: 1.7;
+    font-style: italic; font-size: 1.1rem;
+    color: var(--ink-soft); max-width: 420px;
+    margin: 0 auto; line-height: 1.7;
   }
 
   /* ── RSVP ── */
-  #rsvp {
-    text-align: center;
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem;
-  }
-  @media (min-width: 700px) { #rsvp { padding: 3rem 2rem; } }
-
+  #rsvp { text-align: center; padding: 3rem 2rem; }
   .rsvp-deadline {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
+    font-size: 0.68rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
     margin-bottom: 1rem;
   }
   #rsvp > p {
-    font-size: 0.88rem;
-    color: var(--ink-muted);
-    line-height: 1.9;
-    margin-bottom: 2rem;
+    font-size: 0.87rem; color: var(--ink-muted);
+    line-height: 1.9; margin-bottom: 2rem;
   }
-
-  .rsvp-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    text-align: left;
-  }
+  .rsvp-form { display: flex; flex-direction: column; gap: 0.9rem; text-align: left; }
   .rsvp-form input,
   .rsvp-form select,
   .rsvp-form textarea {
-    width: 100%;
-    padding: 0.95rem 1rem;
+    width: 100%; padding: 0.95rem 1rem;
     background: var(--warm-white);
     border: 0.5px solid var(--border);
     border-radius: 1px;
     font-family: 'Jost', sans-serif;
-    font-size: 16px; /* prevents iOS zoom */
-    font-weight: 300;
+    font-size: 16px; font-weight: 300;
     color: var(--ink);
-    -webkit-appearance: none;
-    appearance: none;
-    letter-spacing: 0.03em;
-    outline: none;
+    -webkit-appearance: none; appearance: none;
+    letter-spacing: 0.03em; outline: none;
     transition: border-color 0.2s;
   }
-  .rsvp-form textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.6;
-  }
+  .rsvp-form textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
   .rsvp-form input:focus,
   .rsvp-form select:focus,
   .rsvp-form textarea:focus { border-color: var(--gold-light); }
   .rsvp-form input::placeholder,
   .rsvp-form textarea::placeholder { color: var(--ink-muted); }
 
-  /* Conditional fields slide in */
   .rsvp-conditional {
-    display: grid;
-    grid-template-rows: 0fr;
+    display: grid; grid-template-rows: 0fr;
     transition: grid-template-rows 0.4s ease, opacity 0.4s ease;
     opacity: 0;
   }
   .rsvp-conditional > div { overflow: hidden; }
-  .rsvp-conditional.open {
-    grid-template-rows: 1fr;
-    opacity: 1;
-  }
-  .rsvp-conditional-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    padding-top: 0.9rem;
-  }
+  .rsvp-conditional.open { grid-template-rows: 1fr; opacity: 1; }
+  .rsvp-conditional-inner { display: flex; flex-direction: column; gap: 0.9rem; padding-top: 0.9rem; }
 
   .rsvp-btn {
-    width: 100%;
-    padding: 1rem;
-    background: var(--ink);
-    color: var(--cream);
-    border: none;
-    border-radius: 1px;
+    width: 100%; padding: 1rem;
+    background: var(--ink); color: var(--cream);
+    border: none; border-radius: 1px;
     font-family: 'Jost', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-    min-height: 50px;
-    margin-top: 0.5rem;
+    font-size: 0.75rem; font-weight: 300;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+    min-height: 50px; margin-top: 0.5rem;
   }
   .rsvp-btn:hover:not(:disabled) { background: var(--gold); }
   .rsvp-btn:disabled { opacity: 0.6; cursor: default; }
@@ -668,10 +454,8 @@
   .success-msg {
     display: none;
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.2rem;
-    color: var(--ink-soft);
-    padding: 2rem;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--ink-soft); padding: 2rem;
     border: 0.5px solid var(--border);
     line-height: 1.7;
   }
@@ -679,325 +463,242 @@
   /* ── FOOTER ── */
   footer {
     text-align: center;
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 2rem 3rem;
     border-top: 0.5px solid var(--border);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
+  }
+  .footer-monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  footer p {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ink-muted);
   }
 
-  /* ── ANIMATIONS ── */
+  /* ── FADE IN ── */
   .fade-in {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
                 transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .fade-in.visible { opacity: 1; transform: none; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="main-nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="#hero">P &amp; VS</a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Åpne meny" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="nav-links" id="nav-links" role="navigation">
-      <a href="#dato"      onclick="closeNav()">Dato &amp; sted</a>
-      <a href="#program"   onclick="closeNav()">Program</a>
-      <a href="#praktisk"  onclick="closeNav()">Praktisk</a>
-      <a href="#meny"      onclick="closeNav()">Meny</a>
-      <a href="#onskeliste" onclick="closeNav()">Gave</a>
-      <a href="#dresscode" onclick="closeNav()">Dresscode</a>
-      <a href="#rsvp"      onclick="closeNav()">RSVP</a>
-    </div>
-  </div>
-</nav>
+<!-- Dekorativ ramme rundt siden -->
+<div class="page-frame" aria-hidden="true"></div>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-img-wrap">
-    <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods" id="hero-img">
-  </div>
-  <p class="eyebrow">Vi gifter oss</p>
-  <h1>Viktoria</h1>
-  <span class="amp">&</span>
-  <h1>Peder</h1>
-  <div class="ornament">3. oktober 2026</div>
-  <p class="date-line">Hvitsten · Jeløya</p>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-arrow"></div>
-  </div>
-</section>
+<div class="card">
 
-<!-- DATO OG STED -->
-<section id="dato" class="fade-in">
-  <p class="section-label">Dato og sted</p>
-  <h2>Lørdag 3. oktober 2026</h2>
-  <div class="divider"></div>
-  <div class="locations">
-    <div class="location-card">
-      <div class="location-img">
-        <img src="./bilder/hvitsten-kirke.png" alt="Hvitsten kirke" style="object-position: center 30%;">
-      </div>
-      <div class="loc-time">Kl. 13:00</div>
-      <h3>Hvitsten kirke</h3>
-      <p>Vigsel<br>Hvitsten, Vestby</p>
+  <!-- HERO -->
+  <section id="hero" class="fade-in">
+    <div class="hero-img-wrap">
+      <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods" id="hero-img">
     </div>
-    <div class="loc-sep"></div>
-    <div class="location-card">
-      <div class="location-img">
-        <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods">
-      </div>
-      <div class="loc-time">Kl. 15:30</div>
-      <h3>Refsnes Gods</h3>
-      <p>Seremoni og feiring<br>Jeløya, Moss</p>
-    </div>
-  </div>
-</section>
+    <p class="eyebrow">Vi gifter oss</p>
+    <h1>Viktoria</h1>
+    <span class="amp">&</span>
+    <h1>Peder</h1>
+    <div class="ornament">3. oktober 2026</div>
+    <p class="date-line">Hvitsten · Jeløya</p>
+  </section>
 
-<!-- PROGRAM -->
-<section id="program" class="fade-in">
-  <p class="section-label">Program</p>
-  <h2>Program</h2>
-  <div class="divider"></div>
-  <ul class="timeline">
-    <li>
-      <div class="tl-time">12:30</div>
-      <div class="tl-event">
-        <div class="tl-title">Ankomst</div>
-        <div class="tl-sub">Hvitsten kirke</div>
-      </div>
-    </li>
-    <li class="hl">
-      <div class="tl-time">13:00</div>
-      <div class="tl-event">
-        <div class="tl-title">Vigsel</div>
-        <div class="tl-sub">Hvitsten kirke</div>
-      </div>
-    </li>
-    <li>
-      <div class="tl-time">14:00</div>
-      <div class="tl-event">
-        <div class="tl-title">Reise til Jeløya</div>
-      </div>
-    </li>
-    <li>
-      <div class="tl-time">15:30</div>
-      <div class="tl-event">
-        <div class="tl-title">Velkomstdrink</div>
-        <div class="tl-sub">Refsnes Gods, hagen</div>
-      </div>
-    </li>
-    <li class="hl">
-      <div class="tl-time">17:00</div>
-      <div class="tl-event">
-        <div class="tl-title">Middag</div>
-        <div class="tl-sub">Refsnes Gods</div>
-      </div>
-    </li>
-    <li>
-      <div class="tl-time">20:30</div>
-      <div class="tl-event">
-        <div class="tl-title">Kaffe og kaker</div>
-        <div class="tl-sub">Bar åpen</div>
-      </div>
-    </li>
-    <li>
-      <div class="tl-time">22:00</div>
-      <div class="tl-event">
-        <div class="tl-title">Dans og fest</div>
-        <div class="tl-sub">Bar åpen</div>
-      </div>
-    </li>
-    <li>
-      <div class="tl-time">02:00</div>
-      <div class="tl-event">
-        <div class="tl-title">Avslutning</div>
-      </div>
-    </li>
-  </ul>
-  <p style="font-size:0.77rem; color:var(--ink-muted); margin-top:1.2rem; text-align:center; font-style:italic;">Mer detaljert program kommer.</p>
-</section>
+  <div class="sep"><span>✦</span></div>
 
-<!-- PRAKTISK -->
-<section id="praktisk" class="fade-in">
-  <p class="section-label">Praktisk informasjon</p>
-  <h2>Alt du trenger å vite</h2>
-  <div class="divider"></div>
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="icon">✦</div>
-      <h4>Overnatting</h4>
-      <p>Refsnes Gods har rom tilgjengelig for bryllupsgjester. Ta kontakt direkte for reservasjon.<br><br>
-      <a href="https://www.refsnesgods.no" target="_blank">refsnesgods.no →</a></p>
+  <!-- DATO OG STED -->
+  <section id="dato" class="fade-in">
+    <p class="section-label">Dato og sted</p>
+    <h2>Lørdag 3. oktober 2026</h2>
+    <div class="divider"></div>
+    <div class="locations">
+      <div class="location-card">
+        <div class="location-img">
+          <img src="./bilder/hvitsten-kirke.png" alt="Hvitsten kirke" style="object-position:center 30%;">
+        </div>
+        <div class="loc-time">Kl. 13:00</div>
+        <h3>Hvitsten kirke</h3>
+        <p>Vigsel<br>Hvitsten, Vestby</p>
+      </div>
+      <div class="loc-sep"></div>
+      <div class="location-card">
+        <div class="location-img">
+          <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods">
+        </div>
+        <div class="loc-time">Kl. 15:30</div>
+        <h3>Refsnes Gods</h3>
+        <p>Seremoni og feiring<br>Jeløya, Moss</p>
+      </div>
     </div>
-    <div class="info-card">
-      <div class="icon">✦</div>
-      <h4>Transport</h4>
-      <p>Vi anbefaler taxi mellom Hvitsten kirke og Refsnes Gods. Nærmeste togstasjon er Moss, ca. 15 min med taxi til hotellet.</p>
-    </div>
-    <div class="info-card">
-      <div class="icon">✦</div>
-      <h4>Parkering</h4>
-      <p>Det er parkering ved begge steder. Vi oppfordrer til samkjøring der det er mulig.</p>
-    </div>
-    <div class="info-card">
-      <div class="icon">✦</div>
-      <h4>Spørsmål?</h4>
-      <p>Ta gjerne kontakt med oss direkte om det er noe du lurer på.</p>
-    </div>
-    <div class="info-card full">
-      <div class="icon">✦</div>
-      <h4>Bar</h4>
-      <p>Det vil være bar tilgjengelig fra kaffe og kaker og utover kvelden. Drikke fra baren betales av gjestene selv.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- MENY -->
-<section id="meny" class="fade-in">
-  <p class="section-label">Middag</p>
-  <h2>Meny</h2>
-  <div class="divider"></div>
+  <div class="sep"><span>✦</span></div>
 
-  <div class="drink-row">
-    <div class="drink-item">
-      <img src="./bilder/musserende.png" alt="Musserende vin">
-      <p class="drink-label">Aperitiff</p>
-      <p class="drink-name">1 glass musserende vin</p>
-      <p class="drink-sub">Alkoholfritt alternativ tilgjengelig</p>
+  <!-- PROGRAM -->
+  <section id="program" class="fade-in">
+    <p class="section-label">Program</p>
+    <h2>Program</h2>
+    <div class="divider"></div>
+    <ul class="timeline">
+      <li><div class="tl-time">12:30</div><div class="tl-event"><div class="tl-title">Ankomst</div><div class="tl-sub">Hvitsten kirke</div></div></li>
+      <li class="hl"><div class="tl-time">13:00</div><div class="tl-event"><div class="tl-title">Vigsel</div><div class="tl-sub">Hvitsten kirke</div></div></li>
+      <li><div class="tl-time">14:00</div><div class="tl-event"><div class="tl-title">Reise til Jeløya</div></div></li>
+      <li><div class="tl-time">15:30</div><div class="tl-event"><div class="tl-title">Velkomstdrink</div><div class="tl-sub">Refsnes Gods, hagen</div></div></li>
+      <li class="hl"><div class="tl-time">17:00</div><div class="tl-event"><div class="tl-title">Middag</div><div class="tl-sub">Refsnes Gods</div></div></li>
+      <li><div class="tl-time">20:30</div><div class="tl-event"><div class="tl-title">Kaffe og kaker</div><div class="tl-sub">Bar åpen</div></div></li>
+      <li><div class="tl-time">22:00</div><div class="tl-event"><div class="tl-title">Dans og fest</div><div class="tl-sub">Bar åpen</div></div></li>
+      <li><div class="tl-time">02:00</div><div class="tl-event"><div class="tl-title">Avslutning</div></div></li>
+    </ul>
+    <p style="font-size:0.75rem;color:var(--ink-muted);margin-top:1.2rem;text-align:center;font-style:italic;">Mer detaljert program kommer.</p>
+  </section>
+
+  <div class="sep"><span>✦</span></div>
+
+  <!-- PRAKTISK -->
+  <section id="praktisk" class="fade-in">
+    <p class="section-label">Praktisk informasjon</p>
+    <h2>Alt du trenger å vite</h2>
+    <div class="divider"></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="icon">✦</div>
+        <h4>Overnatting</h4>
+        <p>Refsnes Gods har rom tilgjengelig for bryllupsgjester. Ta kontakt direkte for reservasjon.<br><br><a href="https://www.refsnesgods.no" target="_blank">refsnesgods.no →</a></p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✦</div>
+        <h4>Transport</h4>
+        <p>Vi anbefaler taxi mellom Hvitsten kirke og Refsnes Gods. Nærmeste togstasjon er Moss, ca. 15 min med taxi.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✦</div>
+        <h4>Parkering</h4>
+        <p>Det er parkering ved begge steder. Vi oppfordrer til samkjøring der det er mulig.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✦</div>
+        <h4>Spørsmål?</h4>
+        <p>Ta gjerne kontakt med oss direkte om det er noe du lurer på.</p>
+      </div>
+      <div class="info-card full">
+        <div class="icon">✦</div>
+        <h4>Bar</h4>
+        <p>Det vil være bar tilgjengelig fra kaffe og kaker og utover kvelden. Drikke fra baren betales av gjestene selv.</p>
+      </div>
     </div>
-    <div class="drink-item">
-      <img src="./bilder/vinpakke.png" alt="Vinpakke">
-      <p class="drink-label">Vinpakke</p>
-      <p class="drink-name">3 glass til maten</p>
-      <p class="drink-sub">Alkoholfritt alternativ tilgjengelig</p>
+  </section>
+
+  <div class="sep"><span>✦</span></div>
+
+  <!-- MENY -->
+  <section id="meny" class="fade-in">
+    <p class="section-label">Middag</p>
+    <h2>Meny</h2>
+    <div class="divider"></div>
+    <div class="drink-row">
+      <div class="drink-item">
+        <img src="./bilder/musserende.png" alt="Musserende vin">
+        <p class="drink-label">Aperitiff</p>
+        <p class="drink-name">1 glass musserende vin</p>
+        <p class="drink-sub">Alkoholfritt alternativ tilgjengelig</p>
+      </div>
+      <div class="drink-item">
+        <img src="./bilder/vinpakke.png" alt="Vinpakke">
+        <p class="drink-label">Vinpakke</p>
+        <p class="drink-name">3 glass til maten</p>
+        <p class="drink-sub">Alkoholfritt alternativ tilgjengelig</p>
+      </div>
     </div>
+    <div class="course-row">
+      <img src="./bilder/forrett.png" alt="Forrett">
+      <div><p class="course-label">Forrett</p><p class="course-name">Bakt laks</p><p class="course-desc">Urtesalat, soyavinaigrette,<br>wonton-chips, dillmajones</p></div>
+    </div>
+    <div class="course-row reverse">
+      <img src="./bilder/hovedrett.png" alt="Hovedrett">
+      <div><p class="course-label">Hovedrett</p><p class="course-name">Andeconfit</p><p class="course-desc">Sesongens primører,<br>pommes purée, rødvinssaus</p></div>
+    </div>
+    <div class="course-row">
+      <img src="./bilder/dessert.png" alt="Dessert">
+      <div><p class="course-label">Dessert</p><p class="course-name">Pavlova</p><p class="course-desc">Friske bær, krem</p></div>
+    </div>
+  </section>
+
+  <div class="sep"><span>✦</span></div>
+
+  <!-- ØNSKELISTE -->
+  <section id="onskeliste" class="fade-in">
+    <p class="section-label">Gave</p>
+    <h2>Ønskeliste</h2>
+    <div class="divider"></div>
+    <p class="wish-intro">Den beste gaven er at dere er der og feirer denne dagen med oss. Har dere likevel lyst til å gi noe, finner dere ønskelisten vår her:</p>
+    <!-- Bytt ut href="#" med selve lenken når dere har valgt app -->
+    <a href="#" class="wish-btn">Se ønskelisten</a>
+    <p style="font-size:0.72rem;color:var(--ink-muted);margin-top:1.25rem;font-style:italic;">Lenke kommer snart.</p>
+  </section>
+
+  <div class="sep"><span>✦</span></div>
+
+  <!-- DRESSCODE -->
+  <div id="dresscode" class="fade-in">
+    <div class="dc-label">Dresscode</div>
+    <h2>Mørk dress / Cocktailkjole</h2>
+    <p>Vi setter stor pris på at dere kler dere elegant til feiringen. Unngå hvit og kremfarge av hensyn til bruden.</p>
   </div>
 
-  <div class="course-row">
-    <img src="./bilder/forrett.png" alt="Forrett">
-    <div>
-      <p class="course-label">Forrett</p>
-      <p class="course-name">Bakt laks</p>
-      <p class="course-desc">Urtesalat, soyavinaigrette,<br>wonton-chips, dillmajones</p>
-    </div>
-  </div>
+  <div class="sep"><span>✦</span></div>
 
-  <div class="course-row reverse">
-    <img src="./bilder/hovedrett.png" alt="Hovedrett">
-    <div>
-      <p class="course-label">Hovedrett</p>
-      <p class="course-name">Andeconfit</p>
-      <p class="course-desc">Sesongens primører,<br>pommes purée, rødvinssaus</p>
-    </div>
-  </div>
-
-  <div class="course-row">
-    <img src="./bilder/dessert.png" alt="Dessert">
-    <div>
-      <p class="course-label">Dessert</p>
-      <p class="course-name">Pavlova</p>
-      <p class="course-desc">Friske bær, krem</p>
-    </div>
-  </div>
-</section>
-
-<!-- ØNSKELISTE -->
-<section id="onskeliste" class="fade-in">
-  <p class="section-label">Gave</p>
-  <h2>Ønskeliste</h2>
-  <div class="divider"></div>
-  <p class="wish-intro">Den beste gaven er at dere er der og feirer denne dagen med oss. Har dere likevel lyst til å gi noe, finner dere ønskelisten vår her:</p>
-  <!--
-    OPPDATER LENKEN når dere har valgt ønskeliste-app.
-    Bytt ut href="#" med selve lenken.
-  -->
-  <a href="#" class="wish-btn">Se ønskelisten</a>
-  <p style="font-size:0.72rem; color:var(--ink-muted); margin-top:1.25rem; font-style:italic;">Lenke kommer snart.</p>
-</section>
-
-<!-- DRESSCODE -->
-<div id="dresscode" class="fade-in">
-  <div class="dc-label">Dresscode</div>
-  <h2>Mørk dress / Cocktailkjole</h2>
-  <p>Vi setter stor pris på at dere kler dere elegant til feiringen. Unngå hvit og kremfarge av hensyn til bruden.</p>
-</div>
-
-<!-- RSVP -->
-<section id="rsvp" class="fade-in">
-  <p class="section-label">Bekreft deltakelse</p>
-  <h2>Gi oss beskjed</h2>
-  <div class="divider"></div>
-  <p class="rsvp-deadline">Svarfrist: 1. september 2026</p>
-  <p>Vi ser frem til å feire denne dagen med dere. Vennligst gi oss beskjed om du kommer, slik at vi kan planlegge dagen.</p>
-
-  <form class="rsvp-form" id="rsvp-form" onsubmit="sendRsvp(event)">
-    <input type="text"  placeholder="Fullt navn *"      id="name"  required autocomplete="name">
-    <input type="email" placeholder="E-postadresse"     id="email"           autocomplete="email">
-    <select id="attending" required onchange="toggleConditional(this.value)">
-      <option value="" disabled selected>Kommer du? *</option>
-      <option value="ja">Ja, jeg kommer gjerne!</option>
-      <option value="nei">Dessverre kan jeg ikke komme</option>
-    </select>
-
-    <div class="rsvp-conditional" id="rsvp-conditional">
-      <div>
-        <div class="rsvp-conditional-inner">
-          <input type="text" placeholder="Allergier eller matpreferanser (valgfritt)" id="dietary">
-          <textarea placeholder="Melding til oss (valgfritt)" id="message" rows="3"></textarea>
+  <!-- RSVP -->
+  <section id="rsvp" class="fade-in">
+    <p class="section-label">Bekreft deltakelse</p>
+    <h2>Gi oss beskjed</h2>
+    <div class="divider"></div>
+    <p class="rsvp-deadline">Svarfrist: 1. september 2026</p>
+    <p>Vi ser frem til å feire denne dagen med dere. Vennligst gi oss beskjed om du kommer, slik at vi kan planlegge dagen.</p>
+    <form class="rsvp-form" id="rsvp-form" onsubmit="sendRsvp(event)">
+      <input type="text"  placeholder="Fullt navn *"   id="name"  required autocomplete="name">
+      <input type="email" placeholder="E-postadresse"  id="email"          autocomplete="email">
+      <select id="attending" required onchange="toggleConditional(this.value)">
+        <option value="" disabled selected>Kommer du? *</option>
+        <option value="ja">Ja, jeg kommer gjerne!</option>
+        <option value="nei">Dessverre kan jeg ikke komme</option>
+      </select>
+      <div class="rsvp-conditional" id="rsvp-conditional">
+        <div>
+          <div class="rsvp-conditional-inner">
+            <input type="text" placeholder="Allergier eller matpreferanser (valgfritt)" id="dietary">
+            <textarea placeholder="Melding til oss (valgfritt)" id="message" rows="3"></textarea>
+          </div>
         </div>
       </div>
+      <button type="submit" class="rsvp-btn" id="rsvp-btn">Send svar</button>
+    </form>
+    <div class="success-msg" id="success-msg">
+      Tusen takk for ditt svar.<br>Vi gleder oss til å se deg!
     </div>
+  </section>
 
-    <button type="submit" class="rsvp-btn" id="rsvp-btn">Send svar</button>
-  </form>
+  <footer>
+    <span class="footer-monogram">V & P</span>
+    <p>3. oktober 2026 · Hvitsten & Jeløya</p>
+  </footer>
 
-  <div class="success-msg" id="success-msg">
-    Tusen takk for ditt svar.<br>Vi gleder oss til å se deg!
-  </div>
-</section>
-
-<footer>
-  <p>Peder &amp; Viktoria Sofie · 3. oktober 2026</p>
-</footer>
+</div><!-- /card -->
 
 <script>
-  // ─────────────────────────────────────────────────────────────
-  // GOOGLE SHEETS INTEGRASJON
-  // Se google-apps-script.js for oppsettinstruksjoner.
-  // Lim inn URL-en fra Apps Script her:
-  // ─────────────────────────────────────────────────────────────
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyop_4fdGWc2K6nWAZciDDwpfcX6OVUQpKjpj5HoXTOiIBUQ1y4bVWUkabQTuXC9cww/exec';
 
-  // ── Nav ──
-  const toggle    = document.getElementById('nav-toggle');
-  const navLinks  = document.getElementById('nav-links');
-
-  toggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open);
-  });
-
-  function closeNav() {
-    navLinks.classList.remove('open');
-    toggle.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-  }
-
-  // Close nav when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!document.getElementById('main-nav').contains(e.target)) closeNav();
-  });
-
-  // ── RSVP ──
   function toggleConditional(val) {
     document.getElementById('rsvp-conditional').classList.toggle('open', val === 'ja');
   }
@@ -1009,41 +710,24 @@
     const attending = document.getElementById('attending').value;
     const dietary   = document.getElementById('dietary').value.trim();
     const message   = document.getElementById('message').value.trim();
-
-    if (!name || !attending) {
-      alert('Vennligst fyll ut navn og om du kommer.');
-      return;
-    }
-
+    if (!name || !attending) { alert('Vennligst fyll ut navn og om du kommer.'); return; }
     const btn = document.getElementById('rsvp-btn');
-    btn.textContent = 'Sender…';
-    btn.disabled = true;
-
+    btn.textContent = 'Sender…'; btn.disabled = true;
     try {
       await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: 'POST', mode: 'no-cors',
         body: new URLSearchParams({ name, email, attending, dietary, message })
       });
-    } catch (_) { /* no-cors gir alltid opaque respons */ }
-
+    } catch (_) {}
     document.getElementById('rsvp-form').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
   }
 
-  // ── Scroll fade-in ──
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.05 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // ── Parallax hero (desktop only) ──
   if (window.innerWidth > 700) {
     const heroImg = document.getElementById('hero-img');
     window.addEventListener('scroll', () => {
