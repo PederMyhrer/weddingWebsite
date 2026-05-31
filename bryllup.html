@@ -85,13 +85,6 @@
     transform: translateY(0px);
     will-change: transform;
   }
-  .watercolor-placeholder {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.05em;
-  }
 
   .eyebrow {
     font-size: 0.68rem;
@@ -253,12 +246,6 @@
     height: 100%;
     object-fit: cover;
   }
-  .watercolor-sm .placeholder-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.8rem;
-    color: rgba(90, 78, 69, 0.6);
-  }
 
   /* PROGRAM */
   .timeline {
@@ -365,6 +352,35 @@
   }
   .info-card a:hover { color: var(--gold); }
 
+  /* ØNSKELISTE */
+  #onskeliste {
+    text-align: center;
+  }
+  #onskeliste .wish-intro {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    max-width: 480px;
+    margin: 0 auto 2rem;
+  }
+  .wish-btn {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    border: 0.5px solid var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .wish-btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
   /* DRESSCODE */
   #dresscode {
     text-align: center;
@@ -419,7 +435,9 @@
     gap: 1rem;
     text-align: left;
   }
-  .rsvp-form input, .rsvp-form select {
+  .rsvp-form input,
+  .rsvp-form select,
+  .rsvp-form textarea {
     width: 100%;
     padding: 0.85rem 1rem;
     background: var(--warm-white);
@@ -434,12 +452,33 @@
     letter-spacing: 0.03em;
     outline: none;
     transition: border-color 0.2s;
-    appearance: none;
   }
-  .rsvp-form input:focus, .rsvp-form select:focus {
+  .rsvp-form textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.6;
+  }
+  .rsvp-form input:focus,
+  .rsvp-form select:focus,
+  .rsvp-form textarea:focus {
     border-color: var(--gold-light);
   }
-  .rsvp-form input::placeholder { color: var(--ink-muted); }
+  .rsvp-form input::placeholder,
+  .rsvp-form textarea::placeholder { color: var(--ink-muted); }
+
+  .rsvp-conditional {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+  }
+  .rsvp-conditional.visible {
+    max-height: 400px;
+    opacity: 1;
+  }
 
   .rsvp-btn {
     width: 100%;
@@ -457,7 +496,8 @@
     transition: background 0.2s;
     margin-top: 0.5rem;
   }
-  .rsvp-btn:hover { background: var(--gold); }
+  .rsvp-btn:hover:not(:disabled) { background: var(--gold); }
+  .rsvp-btn:disabled { opacity: 0.6; cursor: default; }
 
   .success-msg {
     display: none;
@@ -487,10 +527,6 @@
     transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-  .fade-in.visible > * {
     opacity: 1;
     transform: none;
   }
@@ -527,7 +563,9 @@
     .timeline .e { padding-left: 1rem; }
     #dresscode { padding: 3rem 1.25rem; }
     #dresscode p { font-size: 1rem; }
-    .rsvp-form input, .rsvp-form select { font-size: 1rem; padding: 0.9rem 1rem; }
+    .rsvp-form input,
+    .rsvp-form select,
+    .rsvp-form textarea { font-size: 1rem; padding: 0.9rem 1rem; }
     .rsvp-btn { font-size: 0.75rem; padding: 1rem; }
     .scroll-hint { display: none; }
   }
@@ -541,6 +579,7 @@
   <a href="#program">Program</a>
   <a href="#praktisk">Praktisk</a>
   <a href="#meny">Meny</a>
+  <a href="#onskeliste">Gave</a>
   <a href="#dresscode">Dresscode</a>
   <a href="#rsvp">RSVP</a>
 </nav>
@@ -571,7 +610,7 @@
   <div class="locations">
     <div class="location-card">
       <div class="watercolor-sm" id="kirke-img">
-        <img style="object-position: center 30%;" src="./bilder/hvitsten-kirke.png" alt="Hvitsten kirke" style="width:100%;height:100%;object-fit:cover;">
+        <img style="object-position: center 30%;" src="./bilder/hvitsten-kirke.png" alt="Hvitsten kirke">
       </div>
       <div class="time">Kl. 13:00</div>
       <h3>Hvitsten kirke</h3>
@@ -580,7 +619,7 @@
     <div class="separator"></div>
     <div class="location-card">
       <div class="watercolor-sm" id="gods-img">
-        <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods" style="width:100%;height:100%;object-fit:cover;">
+        <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods">
       </div>
       <div class="time">Kl. 15:30</div>
       <h3>Refsnes Gods</h3>
@@ -668,7 +707,7 @@
     <div class="info-card">
       <div class="icon">✦</div>
       <h4>Transport</h4>
-      <p>Vi anbefaler å bruke taxi mellom Hvitsten kirke og Refsnes Gods. Nærmeste togstasjon er Moss, ca. 15 min med taxi til hotellet.</p>
+      <p>Vi anbefaler taxi mellom Hvitsten kirke og Refsnes Gods. Nærmeste togstasjon er Moss, ca. 15 min med taxi til hotellet.</p>
     </div>
     <div class="info-card">
       <div class="icon">✦</div>
@@ -741,8 +780,22 @@
       <p style="font-size:0.78rem; color:var(--ink-muted); line-height:1.7;">Friske bær, krem</p>
     </div>
   </div>
+</section>
 
-
+<!-- ØNSKELISTE -->
+<section id="onskeliste" class="fade-in">
+  <p class="section-label">Gave</p>
+  <h2>Ønskeliste</h2>
+  <div class="divider"></div>
+  <p class="wish-intro">
+    Den beste gaven er at dere er der og feirer denne dagen med oss. Har dere likevel lyst til å gi noe, finner dere ønskelisten vår her:
+  </p>
+  <!--
+    OPPDATER LENKEN UNDER når dere har valgt ønskeliste-app.
+    Bytt ut # med selve lenken, f.eks. https://www.amazon.com/wedding/... eller https://www.onskeliste.no/...
+  -->
+  <a href="#" class="wish-btn" id="wish-link">Se ønskelisten</a>
+  <p style="font-size:0.72rem; color:var(--ink-muted); margin-top:1.5rem; font-style:italic;">Lenke til ønskeliste kommer snart.</p>
 </section>
 
 <!-- DRESSCODE -->
@@ -760,16 +813,22 @@
   <p class="rsvp-deadline">Svarfrist: 1. september 2026</p>
   <p>Vi ser frem til å feire denne dagen med dere. Vennligst gi oss beskjed om du kommer, slik at vi kan planlegge dagen.</p>
 
-  <div class="rsvp-form" id="rsvp-form">
-    <input type="text" placeholder="Fullt navn" id="name" required style="font-size:16px;">
-    <input type="email" placeholder="E-postadresse" id="email" style="font-size:16px;">
-    <select id="attending" style="font-size:16px;">
-      <option value="" disabled selected>Kommer du?</option>
+  <form class="rsvp-form" id="rsvp-form" onsubmit="sendRsvp(event)">
+    <input type="text" placeholder="Fullt navn *" id="name" required autocomplete="name" style="font-size:16px;">
+    <input type="email" placeholder="E-postadresse" id="email" autocomplete="email" style="font-size:16px;">
+    <select id="attending" required style="font-size:16px;" onchange="toggleConditional(this.value)">
+      <option value="" disabled selected>Kommer du? *</option>
       <option value="ja">Ja, jeg kommer gjerne!</option>
       <option value="nei">Dessverre kan jeg ikke komme</option>
     </select>
-    <button class="rsvp-btn" onclick="sendRsvp()">Send svar</button>
-  </div>
+
+    <div class="rsvp-conditional" id="rsvp-conditional">
+      <input type="text" placeholder="Allergier eller matpreferanser (valgfritt)" id="dietary" style="font-size:16px;">
+      <textarea placeholder="Melding til oss (valgfritt)" id="message" rows="3" style="font-size:16px;"></textarea>
+    </div>
+
+    <button type="submit" class="rsvp-btn" id="rsvp-btn">Send svar</button>
+  </form>
 
   <div class="success-msg" id="success-msg">
     Tusen takk for ditt svar. Vi gleder oss til å se deg!
@@ -781,6 +840,58 @@
 </footer>
 
 <script>
+  // ─────────────────────────────────────────────────────────────
+  // GOOGLE SHEETS INTEGRASJON
+  // 1. Gå til script.google.com og opprett et nytt prosjekt
+  // 2. Lim inn koden fra google-apps-script.js
+  // 3. Publiser som web-app (Kjør som: Meg, Tilgang: Alle)
+  // 4. Lim inn URL-en du får under
+  // ─────────────────────────────────────────────────────────────
+  const APPS_SCRIPT_URL = 'DIN_APPS_SCRIPT_URL_HER';
+
+  async function sendRsvp(e) {
+    e.preventDefault();
+
+    const name     = document.getElementById('name').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const attending = document.getElementById('attending').value;
+    const dietary  = document.getElementById('dietary').value.trim();
+    const message  = document.getElementById('message').value.trim();
+
+    if (!name || !attending) {
+      alert('Vennligst fyll ut navn og om du kommer.');
+      return;
+    }
+
+    const btn = document.getElementById('rsvp-btn');
+    btn.textContent = 'Sender…';
+    btn.disabled = true;
+
+    try {
+      const body = new URLSearchParams({ name, email, attending, dietary, message });
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body
+      });
+    } catch (_) {
+      // no-cors gir alltid en opaque respons, så vi viser suksess uansett
+    }
+
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+
+  function toggleConditional(val) {
+    const el = document.getElementById('rsvp-conditional');
+    if (val === 'ja') {
+      el.classList.add('visible');
+    } else {
+      el.classList.remove('visible');
+    }
+  }
+
+  // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -792,24 +903,13 @@
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+  // Parallax hero
   const heroImg = document.querySelector('.hero-watercolor img');
   if (heroImg && window.innerWidth > 700) {
     window.addEventListener('scroll', function() {
-      const scrollY = window.scrollY;
-      const shift = Math.min(scrollY * 0.3, 60);
+      const shift = Math.min(window.scrollY * 0.3, 60);
       heroImg.style.transform = 'translateY(' + shift + 'px)';
     }, { passive: true });
-  }
-
-  function sendRsvp() {
-    const name = document.getElementById('name').value.trim();
-    const attending = document.getElementById('attending').value;
-    if (!name || !attending) {
-      alert('Vennligst fyll ut navn og om du kommer.');
-      return;
-    }
-    document.getElementById('rsvp-form').style.display = 'none';
-    document.getElementById('success-msg').style.display = 'block';
   }
 </script>
 
