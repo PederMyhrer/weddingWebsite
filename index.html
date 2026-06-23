@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Peder & Viktoria Sofie — 3. oktober 2000</title>
+<title>Peder & Viktoria Sofie — 3. oktober 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -508,11 +508,11 @@
     <div class="hero-img-wrap">
       <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods" id="hero-img">
     </div>
-    <p class="eyebrow">Vi tester oss</p>
+    <p class="eyebrow">Vi gifter oss</p>
     <h1>Viktoria</h1>
     <span class="amp">&</span>
     <h1>Peder</h1>
-    <div class="ornament">3. oktober 2000</div>
+    <div class="ornament">3. oktober 2026</div>
     <p class="date-line">Hvitsten · Jeløya</p>
   </section>
 
@@ -539,7 +539,7 @@
         </div>
         <div class="loc-time">Kl. 15:30</div>
         <h3>Refsnes Gods</h3>
-        <p>Seremoni og feiring<br>Jeløya, Moss</p>
+        <p>Middag og feiring<br>Jeløya, Moss</p>
       </div>
     </div>
   </section>
@@ -552,16 +552,13 @@
     <h2>Program</h2>
     <div class="divider"></div>
     <ul class="timeline">
-      <li><div class="tl-time">12:30</div><div class="tl-event"><div class="tl-title">Ankomst</div><div class="tl-sub">Hvitsten kirke</div></div></li>
-      <li class="hl"><div class="tl-time">13:00</div><div class="tl-event"><div class="tl-title">Vigsel</div><div class="tl-sub">Hvitsten kirke</div></div></li>
-      <li><div class="tl-time">14:00</div><div class="tl-event"><div class="tl-title">Reise til Jeløya</div></div></li>
-      <li><div class="tl-time">15:30</div><div class="tl-event"><div class="tl-title">Velkomstdrink</div><div class="tl-sub">Refsnes Gods, hagen</div></div></li>
-      <li class="hl"><div class="tl-time">17:00</div><div class="tl-event"><div class="tl-title">Middag</div><div class="tl-sub">Refsnes Gods</div></div></li>
-      <li><div class="tl-time">20:30</div><div class="tl-event"><div class="tl-title">Kaffe og kaker</div><div class="tl-sub">Bar åpen</div></div></li>
+      <li class="hl"><div class="tl-time">12:00</div><div class="tl-event"><div class="tl-title">Vigsel</div><div class="tl-sub">Hvitsten kirke</div></div></li>
+      <li><div class="tl-time">14:30</div><div class="tl-event"><div class="tl-title">Velkomstdrink</div><div class="tl-sub">Refsnes Gods, hagen</div></div></li>
+      <li class="hl"><div class="tl-time">16:00</div><div class="tl-event"><div class="tl-title">Middag</div><div class="tl-sub">Refsnes Gods</div></div></li>
+      <li><div class="tl-time">20:00</div><div class="tl-event"><div class="tl-title">Kaffe og kaker</div><div class="tl-sub">Bar åpen</div></div></li>
       <li><div class="tl-time">22:00</div><div class="tl-event"><div class="tl-title">Dans og fest</div><div class="tl-sub">Bar åpen</div></div></li>
       <li><div class="tl-time">02:00</div><div class="tl-event"><div class="tl-title">Avslutning</div></div></li>
     </ul>
-    <p style="font-size:0.75rem;color:var(--ink-muted);margin-top:1.2rem;text-align:center;font-style:italic;">Mer detaljert program kommer.</p>
   </section>
 
   <div class="sep"><span>✦</span></div>
@@ -677,16 +674,14 @@
       <div class="rsvp-conditional" id="rsvp-conditional">
         <div>
           <div class="rsvp-conditional-inner">
-            <input type="text" placeholder="Allergier eller matpreferanser (valgfritt)" id="dietary">
+            <input type="text" placeholder="Allergier (valgfritt)" id="dietary">
             <textarea placeholder="Melding til oss (valgfritt)" id="message" rows="3"></textarea>
           </div>
         </div>
       </div>
       <button type="submit" class="rsvp-btn" id="rsvp-btn">Send svar</button>
     </form>
-    <div class="success-msg" id="success-msg">
-      Tusen takk for ditt svar.<br>Vi gleder oss til å se deg!
-    </div>
+    <div class="success-msg" id="success-msg"></div>
   </section>
 
   <footer>
@@ -719,6 +714,10 @@
         body: new URLSearchParams({ name, email, attending, dietary, message })
       });
     } catch (_) {}
+    const msg = attending === 'ja'
+      ? 'Tusen takk, ' + name + '!<br>Vi gleder oss til å feire med deg.'
+      : 'Tusen takk for beskjeden, ' + name + '.<br>Vi savner deg!';
+    document.getElementById('success-msg').innerHTML = msg;
     document.getElementById('rsvp-form').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
   }
