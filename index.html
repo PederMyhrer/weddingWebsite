@@ -639,10 +639,8 @@
     <p class="section-label">Gave</p>
     <h2>Ønskeliste</h2>
     <div class="divider"></div>
-    <p class="wish-intro">Den beste gaven er at dere er der og feirer denne dagen med oss. Har dere likevel lyst til å gi noe, finner dere ønskelisten vår her:</p>
-    <!-- Bytt ut href="#" med selve lenken når dere har valgt app -->
-    <a href="#" class="wish-btn">Se ønskelisten</a>
-    <p style="font-size:0.72rem;color:var(--ink-muted);margin-top:1.25rem;font-style:italic;">Lenke kommer snart.</p>
+    <p class="wish-intro">Den beste gaven er at dere er der og feirer denne dagen med oss. Har dere likevel lyst til å gi noe, har vi laget en ønskeliste på onsk.no. Der kan du enkelt holde av en gave, så unngår vi at noen kjøper det samme. Vi ser ikke hvem som velger hva.</p>
+    <a href="https://onsk.no/lister/y07-e7l?s=436822" target="_blank" class="wish-btn">Se ønskelisten</a>
   </section>
 
   <div class="sep"><span>✦</span></div>
@@ -718,9 +716,6 @@
       ? 'Tusen takk, ' + name + '!<br>Vi gleder oss til å feire med deg.'
       : 'Tusen takk for beskjeden, ' + name + '.<br>Vi savner deg!';
     document.getElementById('success-msg').innerHTML = msg;
-    const msg = attending === 'ja'
-      ? 'Tusen takk, ' + name + '!<br>Vi gleder oss til å feire med deg.'
-      : 'Tusen takk for beskjeden, ' + name + '.<br>Vi savner deg!';
     document.getElementById('success-msg').innerHTML = msg;
     document.getElementById('rsvp-form').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
