@@ -553,9 +553,9 @@
     <div class="divider"></div>
     <ul class="timeline">
       <li class="hl"><div class="tl-time">12:00</div><div class="tl-event"><div class="tl-title">Vigsel</div><div class="tl-sub">Hvitsten kirke</div></div></li>
-      <li><div class="tl-time">14:30</div><div class="tl-event"><div class="tl-title">Velkomstdrink</div><div class="tl-sub">Refsnes Gods, hagen</div></div></li>
+      <li><div class="tl-time">14:30</div><div class="tl-event"><div class="tl-title">Ankomst Refsnes Gods</div><div class="tl-sub">Lounge og hage åpen</div></div></li>
       <li class="hl"><div class="tl-time">16:00</div><div class="tl-event"><div class="tl-title">Middag</div><div class="tl-sub">Refsnes Gods</div></div></li>
-      <li><div class="tl-time">20:00</div><div class="tl-event"><div class="tl-title">Kaffe og kaker</div><div class="tl-sub">Bar åpen</div></div></li>
+      <li><div class="tl-time">19:30</div><div class="tl-event"><div class="tl-title">Kaffe og kaker</div><div class="tl-sub">Vanity Fair-rommet · Bar åpen</div></div></li>
       <li><div class="tl-time">22:00</div><div class="tl-event"><div class="tl-title">Dans og fest</div><div class="tl-sub">Bar åpen</div></div></li>
       <li><div class="tl-time">02:00</div><div class="tl-event"><div class="tl-title">Avslutning</div></div></li>
     </ul>
@@ -572,7 +572,7 @@
       <div class="info-card">
         <div class="icon">✦</div>
         <h4>Overnatting</h4>
-        <p>Refsnes Gods har rom tilgjengelig for bryllupsgjester. Ta kontakt direkte for reservasjon.<br><br><a href="https://www.refsnesgods.no" target="_blank">refsnesgods.no →</a></p>
+        <p>Vi har reservert rom på Refsnes Gods til bryllupsgjester. Book via lenken under — koden <strong>BRY26</strong> er allerede lagt inn.<br><br><a href="https://booking.refsnesgods.no/campaign/campaign-details?channelid=c349fa43-f5fe-4701-bd7a-02a1c12fc1cf&culture=nb&pseudo_id=pseudo_ai2g1ybeuzh_1745329660269&roomconfig=a2&year=2026&month=10&day=3&staylength=2&promocode=BRY26&campaignid=49705972-df60-4b8a-bc96-c6aa122c17a5" target="_blank" style="display:inline-block; margin-top:0.8rem; padding:0.7rem 1.4rem; border:0.5px solid var(--ink); font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink); text-decoration:none; transition:background 0.2s, color 0.2s;" onmouseover="this.style.background='#2c2520';this.style.color='#f8f4ee'" onmouseout="this.style.background='transparent';this.style.color='#2c2520'">Book rom →</a><br><br>Booking er tilgjengelig frem til 3. juli 2026.</p>
       </div>
       <div class="info-card">
         <div class="icon">✦</div>
@@ -582,17 +582,17 @@
       <div class="info-card">
         <div class="icon">✦</div>
         <h4>Parkering</h4>
-        <p>Det er parkering ved begge steder. Vi oppfordrer til samkjøring der det er mulig.</p>
+        <p>Det er gratis parkering ved Refsnes Gods. Ønsker du plass i parkeringskjelleren bruker du koden <strong>4515</strong>.</p>
       </div>
       <div class="info-card">
         <div class="icon">✦</div>
-        <h4>Spørsmål?</h4>
-        <p>Ta gjerne kontakt med oss direkte om det er noe du lurer på.</p>
+        <h4>Mellom vielse og middag</h4>
+        <p>Fra vielsen er over til middagen starter er loungen og hagen på Refsnes Gods åpen for gjestene. Her kan man kjøpe drikke og noe lett å spise.</p>
       </div>
       <div class="info-card full">
         <div class="icon">✦</div>
         <h4>Bar</h4>
-        <p>Det vil være bar tilgjengelig fra kaffe og kaker og utover kvelden. Drikke fra baren betales av gjestene selv.</p>
+        <p>Det er bar tilgjengelig fra kaffe og kaker og utover kvelden. Drikke fra baren betales av gjestene selv.</p>
       </div>
     </div>
   </section>
@@ -714,6 +714,10 @@
         body: new URLSearchParams({ name, email, attending, dietary, message })
       });
     } catch (_) {}
+    const msg = attending === 'ja'
+      ? 'Tusen takk, ' + name + '!<br>Vi gleder oss til å feire med deg.'
+      : 'Tusen takk for beskjeden, ' + name + '.<br>Vi savner deg!';
+    document.getElementById('success-msg').innerHTML = msg;
     const msg = attending === 'ja'
       ? 'Tusen takk, ' + name + '!<br>Vi gleder oss til å feire med deg.'
       : 'Tusen takk for beskjeden, ' + name + '.<br>Vi savner deg!';
