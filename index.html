@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Peder & Viktoria Sofie — 3. oktober 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&family=Great+Vibes&family=Pinyon+Script&family=Corinthia&family=Dancing+Script:wght@400&family=Allura&family=Tangerine:wght@400&family=Lovers+Quarrel&family=Parisienne&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -141,7 +141,7 @@
   }
 
   h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Pinyon Script', cursive;
     font-weight: 300;
     font-size: clamp(3rem, 11vw, 5rem);
     line-height: 1.05;
@@ -516,6 +516,7 @@
     <p class="date-line">Hvitsten · Jeløya</p>
   </section>
 
+
   <div class="sep"><span>✦</span></div>
 
   <!-- DATO OG STED -->
@@ -598,8 +599,9 @@
   <!-- MENY -->
   <section id="meny" class="fade-in">
     <p class="section-label">Middag</p>
-    <h2>Meny</h2>
+    <h2 style="cursor:pointer; user-select:none;" onclick="toggleMeny()" id="meny-toggle">Meny <span id="meny-arrow" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.5rem; color:var(--gold); transition:transform 0.3s; display:inline-block;">↓</span></h2>
     <div class="divider"></div>
+    <div id="meny-innhold" style="overflow:hidden; max-height:0; transition:max-height 0.6s ease;">
     <div class="drink-row">
       <div class="drink-item">
         <img src="./bilder/musserende.png" alt="Musserende vin">
@@ -626,6 +628,7 @@
       <img src="./bilder/dessert.png" alt="Dessert">
       <div><p class="course-label">Dessert</p><p class="course-name">Pavlova</p><p class="course-desc">Friske bær, krem</p></div>
     </div>
+    </div><!-- end meny-innhold -->
   </section>
 
   <div class="sep"><span>✦</span></div>
@@ -727,6 +730,19 @@
     window.addEventListener('scroll', () => {
       heroImg.style.transform = 'translateY(' + Math.min(window.scrollY * 0.3, 60) + 'px)';
     }, { passive: true });
+  }
+
+  function toggleMeny() {
+    const innhold = document.getElementById('meny-innhold');
+    const arrow = document.getElementById('meny-arrow');
+    const isOpen = innhold.style.maxHeight !== '0px' && innhold.style.maxHeight !== '';
+    if (isOpen) {
+      innhold.style.maxHeight = '0';
+      arrow.style.transform = 'rotate(0deg)';
+    } else {
+      innhold.style.maxHeight = innhold.scrollHeight + 'px';
+      arrow.style.transform = 'rotate(180deg)';
+    }
   }
 </script>
 </body>
