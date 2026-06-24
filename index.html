@@ -32,7 +32,7 @@
 
   /* ── FIXED INVITATION BORDER FRAME ── */
   .page-frame {
-    position: fixed;
+    position: absolute;
     inset: 10px;
     border: 0.5px solid var(--border-strong);
     pointer-events: none;
@@ -41,6 +41,7 @@
 
   /* ── CARD WRAPPER ── */
   .card {
+    position: relative;
     background: var(--cream);
     max-width: 640px;
     margin: 0 auto;
@@ -49,11 +50,10 @@
 
   @media (min-width: 700px) {
     .card {
-      box-shadow: 0 8px 60px rgba(44, 37, 32, 0.12);
-      margin: 2rem auto;
-      min-height: auto;
+      margin: 0 auto;
+      min-height: 100vh;
     }
-    body { padding: 0 1rem; }
+    body { padding: 0; }
   }
 
   /* ── SECTIONS ── */
@@ -68,6 +68,7 @@
     align-items: center;
     gap: 1rem;
     padding: 0 2rem;
+    margin: 0 16px;
     color: var(--gold-light);
   }
   .sep::before, .sep::after {
@@ -377,8 +378,6 @@
   #dresscode {
     text-align: center;
     padding: 3rem 2rem;
-    border-top: 0.5px solid var(--border);
-    border-bottom: 0.5px solid var(--border);
   }
   .dc-label {
     display: inline-block;
@@ -464,7 +463,6 @@
   footer {
     text-align: center;
     padding: 2.5rem 2rem 3rem;
-    border-top: 0.5px solid var(--border);
   }
   .footer-monogram {
     font-family: 'Cormorant Garamond', serif;
@@ -498,10 +496,10 @@
 </head>
 <body>
 
-<!-- Dekorativ ramme rundt siden -->
-<div class="page-frame" aria-hidden="true"></div>
-
 <div class="card">
+
+  <!-- Dekorativ ramme rundt siden -->
+  <div class="page-frame" aria-hidden="true"></div>
 
   <!-- HERO -->
   <section id="hero" class="fade-in">
@@ -509,7 +507,7 @@
       <img src="./bilder/refsnes-gods.png" alt="Refsnes Gods" id="hero-img">
     </div>
     <p class="eyebrow">Vi gifter oss</p>
-    <h1 style="white-space:nowrap; font-size:clamp(1.6rem, 8vw, 5rem);">Viktoria <span class="amp" style="font-size:0.7em;">&</span> Peder</h1>
+    <h1 style="font-size:clamp(2rem, 11vw, 5rem); white-space:nowrap; letter-spacing:-0.01em;">Viktoria <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.45em; color:var(--gold); vertical-align:middle;">&</span> Peder</h1>
     <div class="ornament">3. oktober 2026</div>
     <p class="date-line">Hvitsten · Jeløya</p>
   </section>
@@ -521,7 +519,6 @@
   <section id="dato" class="fade-in">
     <p class="section-label">Dato og sted</p>
     <h2>Lørdag 3. oktober 2026</h2>
-    <div class="divider"></div>
     <div class="locations">
       <div class="location-card">
         <div class="location-img">
@@ -549,7 +546,6 @@
   <section id="program" class="fade-in">
     <p class="section-label">Program</p>
     <h2>Program</h2>
-    <div class="divider"></div>
     <ul class="timeline">
       <li class="hl"><div class="tl-time">12:00</div><div class="tl-event"><div class="tl-title">Vigsel</div><div class="tl-sub">Hvitsten kirke</div></div></li>
       <li><div class="tl-time">14:30</div><div class="tl-event"><div class="tl-title">Ankomst Refsnes Gods</div><div class="tl-sub">Lounge og hage åpen</div></div></li>
@@ -566,7 +562,6 @@
   <section id="praktisk" class="fade-in">
     <p class="section-label">Praktisk informasjon</p>
     <h2>Alt du trenger å vite</h2>
-    <div class="divider"></div>
     <div class="info-grid">
       <div class="info-card">
         <div class="icon">✦</div>
@@ -598,7 +593,6 @@
   <section id="meny" class="fade-in">
     <p class="section-label">Middag</p>
     <h2 style="cursor:pointer; user-select:none;" onclick="toggleMeny()" id="meny-toggle">Meny <span id="meny-arrow" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.5rem; color:var(--gold); transition:transform 0.3s; display:inline-block;">↓</span></h2>
-    <div class="divider"></div>
     <div id="meny-innhold" style="overflow:hidden; max-height:0; transition:max-height 0.6s ease;">
     <div class="drink-row">
       <div class="drink-item">
@@ -635,7 +629,6 @@
   <section id="onskeliste" class="fade-in">
     <p class="section-label">Gave</p>
     <h2>Ønskeliste</h2>
-    <div class="divider"></div>
     <p class="wish-intro">Den beste gaven er at dere er der og feirer denne dagen med oss. Har dere likevel lyst til å gi noe, har vi laget en ønskeliste på onsk.no. Der kan du enkelt holde av en gave, så unngår vi at noen kjøper det samme. Vi ser ikke hvem som velger hva.</p>
     <a href="https://onsk.no/lister/y07-e7l?s=436822" target="_blank" class="wish-btn">Se ønskelisten</a>
   </section>
@@ -655,7 +648,6 @@
   <section id="rsvp" class="fade-in">
     <p class="section-label">Bekreft deltakelse</p>
     <h2>Gi oss beskjed</h2>
-    <div class="divider"></div>
     <p class="rsvp-deadline">Svarfrist: 1. september 2026</p>
     <p>Vi ser frem til å feire denne dagen med dere. Vennligst gi oss beskjed om du kommer, slik at vi kan planlegge dagen.</p>
     <form class="rsvp-form" id="rsvp-form" onsubmit="sendRsvp(event)">
@@ -678,6 +670,8 @@
     </form>
     <div class="success-msg" id="success-msg"></div>
   </section>
+
+  <div class="sep"><span>✦</span></div>
 
   <footer>
     <span class="footer-monogram">V & P</span>
